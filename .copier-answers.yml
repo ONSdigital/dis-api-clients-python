@@ -1,0 +1,18 @@
+# Changes here will be overwritten by Copier
+# Do not modify this file directly
+# To update the project using the original template, run make copier-update
+_commit: v2.1.2
+_src_path: gh:ONSdigital/ons-python-template
+code_owner: '@ONSdigital/dissemination-data-dissemination'
+default_branch: main
+dependabot_open_pull_requests_limit: 10
+enable_dependabot_version_updates: true
+module_name: dis_api_clients
+package_manager: poetry
+repo_settings: recommended
+repository_description: A collection of API clients written in Python for use across
+    the ONS.
+repository_name: dis-api-clients-python
+repository_owner: ONSdigital
+repository_visibility: public
+set_up_git_repo: true
