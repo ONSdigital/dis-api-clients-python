@@ -17,14 +17,18 @@ A collection of API clients written in Python for use across the ONS.
 
 [//]: # (:TODO: Enable link checking once https://github.com/tcort/markdown-link-check/issues/250 is resolved.)
 <!-- markdown-link-check-disable -->
-- [Getting Started](#getting-started)
-    - [Pre-requisites](#pre-requisites)
-    - [Installation](#installation)
-- [Development](#development)
-    - [Run Tests with Coverage](#run-tests-with-coverage)
-    - [Linting and Formatting](#linting-and-formatting)
-- [Contributing](#contributing)
-- [License](#license)
+- [dis-api-clients-python](#dis-api-clients-python)
+    - [Table of Contents](#table-of-contents)
+    - [Getting Started](#getting-started)
+        - [Pre-requisites](#pre-requisites)
+        - [Installation](#installation)
+    - [Development](#development)
+        - [Run Tests with Coverage](#run-tests-with-coverage)
+        - [Linting and Formatting](#linting-and-formatting)
+            - [Python](#python)
+            - [MegaLinter (Lint/Format non-python files)](#megalinter-lintformat-non-python-files)
+    - [Contributing](#contributing)
+    - [License](#license)
 <!-- markdown-link-check-enable -->
 
 ## Getting Started
@@ -71,12 +75,6 @@ Ensure you have the following installed:
 
    ```bash
    make install
-   ```
-
-3. Run the application
-
-   ```bash
-   make run
    ```
 
 ## Development
