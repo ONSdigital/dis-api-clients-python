@@ -5,7 +5,8 @@ import requests
 
 from dis_api_clients._http import HTTPClient
 from dis_api_clients.exceptions import APIError
-from tests.fakes import FakeResponse, FakeSession
+
+from ..fakes import FakeResponse, FakeSession
 
 
 def test_init_rejects_empty_base_url() -> None:
@@ -26,7 +27,7 @@ def test_init_creates_session_when_not_provided() -> None:
 
 
 def test_init_uses_supplied_session() -> None:
-    session = FakeSession(response=FakeResponse(status_code=200))
+    session = FakeSession(responses=[FakeResponse(status_code=200)])
 
     client = HTTPClient("http://localhost:8080", session=session)
 
@@ -42,7 +43,8 @@ def test_init_rejects_non_session_objects() -> None:
 
 
 def test_request_forwards_options_and_returns_response() -> None:
-    session = FakeSession(response=FakeResponse(status_code=200, payload={"status": "ok"}))
+    response = FakeResponse(status_code=200, payload={"status": "ok"})
+    session = FakeSession(responses=[response])
     client = HTTPClient(
         "http://localhost:8080",
         timeout=10,
@@ -56,8 +58,9 @@ def test_request_forwards_options_and_returns_response() -> None:
         headers={"example-header": "bar"},
     )
 
-    assert result is session.response
-    assert session.last_kwargs == {
+    assert result is response
+    assert len(session.calls) == 1
+    assert session.calls[0] == {
         "method": "GET",
         "url": "http://localhost:8080/health",
         "params": {"exampleParam": "foo"},
@@ -68,7 +71,7 @@ def test_request_forwards_options_and_returns_response() -> None:
 
 
 def test_request_wraps_request_exception() -> None:
-    session = FakeSession(error=requests.ConnectionError("connection failed"))
+    session = FakeSession(responses=[requests.ConnectionError("connection failed")])
     client = HTTPClient("http://localhost:8080", session=session)
 
     with pytest.raises(APIError, match="connection failed"):
@@ -76,7 +79,7 @@ def test_request_wraps_request_exception() -> None:
 
 
 def test_request_raises_api_error_for_http_failures() -> None:
-    session = FakeSession(response=FakeResponse(status_code=500, payload={"error": "internal server error"}))
+    session = FakeSession(responses=[FakeResponse(status_code=500, payload={"error": "internal server error"})])
     client = HTTPClient("http://localhost:8080", session=session)
 
     with pytest.raises(APIError, match="internal server error") as exc_info:

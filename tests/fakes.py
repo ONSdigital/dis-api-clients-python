@@ -1,3 +1,4 @@
+from collections import deque
 from http import HTTPStatus
 
 import requests
@@ -27,21 +28,19 @@ class FakeResponse:
 class FakeSession(requests.Session):
     def __init__(
         self,
-        response: FakeResponse | None = None,
-        error: requests.RequestException | None = None,
+        responses: list[FakeResponse | requests.RequestException],
     ) -> None:
         super().__init__()
-        self.response = response
-        self.error = error
-        self.last_kwargs: dict = {}
+        self.responses = deque(responses)
+        self.calls: list[dict] = []
 
     def request(self, **kwargs):
-        self.last_kwargs = kwargs
+        self.calls.append(kwargs)
 
-        if self.error is not None:
-            raise self.error
+        if not self.responses:
+            raise AssertionError("FakeSession has no responses left")
 
-        if self.response is None:
-            raise AssertionError("FakeSession has no response set")
-
-        return self.response
+        result = self.responses.popleft()
+        if isinstance(result, Exception):
+            raise result
+        return result
