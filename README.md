@@ -19,6 +19,8 @@ A collection of API clients written in Python for use across the ONS.
 <!-- markdown-link-check-disable -->
 - [dis-api-clients-python](#dis-api-clients-python)
     - [Table of Contents](#table-of-contents)
+    - [API Clients](#api-clients)
+        - [Install an API Client](#install-an-api-client)
     - [Getting Started](#getting-started)
         - [Pre-requisites](#pre-requisites)
         - [Installation](#installation)
@@ -30,6 +32,25 @@ A collection of API clients written in Python for use across the ONS.
     - [Contributing](#contributing)
     - [License](#license)
 <!-- markdown-link-check-enable -->
+
+## API Clients
+
+This repository provides the following API clients:
+
+| Service                                          | Documentation                                    |
+|--------------------------------------------------|--------------------------------------------------|
+| [Zebedee](https://github.com/ONSdigital/zebedee) | [Zebedee SDK](dis_api_clients/zebedee/README.md) |
+
+### Install an API Client
+
+Install a release by replacing `<release-tag>` with the version you want from the
+[GitHub releases](https://github.com/ONSdigital/dis-api-clients-python/releases) page:
+
+```bash
+pip install "git+https://github.com/ONSdigital/dis-api-clients-python.git@<release-tag>"
+```
+
+For instructions on local development, see the [Getting Started](#getting-started) section.
 
 ## Getting Started
 
