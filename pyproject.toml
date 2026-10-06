@@ -13,6 +13,7 @@ packages = [{ include = "dis_api_clients" }]
 
 [tool.poetry.dependencies]
 requests = "^2.34.2"
+pydantic = "^2.13.5"
 
 [tool.poetry.group.dev.dependencies]
 # :TODO: Remove pylint when ruff supports all pylint rules
@@ -69,6 +70,8 @@ convention = "google"
 "**/tests/**/*.py" = [
     # Allow use of assert statements in tests
     "S101",
+    # Flags intentional expected values and call counts in test assertions.
+    "PLR2004",
 ]
 
 [tool.ruff.format]
